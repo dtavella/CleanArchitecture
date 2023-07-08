@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Core.Entities
+﻿namespace Core.Entities
 {
-    public class Course
+    public class Course : Auditable<int>
     {
-        public int Id { get; set; }
         public string Name { get; set; }
+        public string Code { get; set; }
+
+        public ICollection<ClassTime> ClassTimes { get; set; } = new HashSet<ClassTime>();
+        public ICollection<Student> Students { get; set; } = new HashSet<Student>();
+
     }
 }

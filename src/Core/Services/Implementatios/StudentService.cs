@@ -14,8 +14,9 @@ namespace Core.Services.Implementatios
 
         public List<StudentDto> GetAll()
         {
-            var entities = _studentRepository.GetAll();
-            return entities.Select(dtos => new StudentDto { Id = dtos.Id, Name = dtos.Name }).ToList();
+            return null;
+            //var entities = _studentRepository.GetAll();
+            //return entities.Select(dtos => new StudentDto { Id = dtos.Id, Name = dtos.Name }).ToList();
         }
     }
 }

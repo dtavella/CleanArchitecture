@@ -1,4 +1,6 @@
-﻿using Core.Services.Interfaces;
+﻿using Core.Entities;
+using Core.Services.Interfaces;
+using Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -7,19 +9,20 @@ namespace API.Controllers
     [ApiController]
     public class StudentController : ControllerBase
     {
-        private readonly IStudentService _service;
-        public StudentController(IStudentService service)
+        private readonly DefaultContext _context;
+
+        public StudentController(DefaultContext context)
         {
-            _service = service;
+            _context = context;
         }
 
         [HttpGet]
         public IActionResult GetAll()
         {
+            var c = _context.Set<Country>().ToList();
 
-            var dtos = _service.GetAll();
 
-            return Ok(dtos);
+            return Ok(c);
         }
     }
 }
