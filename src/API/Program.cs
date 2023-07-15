@@ -1,3 +1,5 @@
+using Core.Repositories;
+using Core.Services.Implementatios;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,7 +12,11 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddControllers();
 
-builder.Services.AddDbContext<DefaultContext>(q => q.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
+builder.Services.AddDbContext<DefaultContext2>(q => q.UseSqlServer(builder.Configuration.GetConnectionString("Default2")));
+
+builder.Services.AddScoped<StudentService>();
+builder.Services.AddScoped<CountryService>();
+builder.Services.AddScoped<StudentServiceAsync>();
 
 var app = builder.Build();
 

@@ -1,22 +1,35 @@
-﻿using Core.Dtos;
+﻿using Core.Entities;
 using Core.Repositories;
-using Core.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace Core.Services.Implementatios
 {
-    public class StudentService : IStudentService
+    public class StudentService
     {
-        private readonly IStudentRepository _studentRepository;
-        public StudentService(IStudentRepository studentRepository) 
+        private readonly DefaultContext2 _context;
+        private readonly IConfiguration _configuration;
+        private readonly ILogger<StudentService> _logger;
+        private readonly CountryService _countryService;
+
+        public StudentService(DefaultContext2 context, ILogger<StudentService> logger, CountryService countryService) 
         {
-            _studentRepository = studentRepository;
+            _context = context;
+            //_configuration = configuration;
+            _logger = logger;
+            _countryService = countryService;
         }
 
-        public List<StudentDto> GetAll()
+        public List<Student> GetAll()
         {
-            return null;
-            //var entities = _studentRepository.GetAll();
-            //return entities.Select(dtos => new StudentDto { Id = dtos.Id, Name = dtos.Name }).ToList();
+            var students = _context.Students
+                            .Include(q => q.Country)
+                            //.Where(q => q.DocumentNumber == "232323232")
+                            .ToList();
+
+
+            return students;
         }
     }
 }
