@@ -1,15 +1,17 @@
-﻿using Core.Dtos;
-using Core.Entities;
+﻿using Core.Entities;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Linq.Expressions;
 
 namespace Core.Repositories
 {
     public interface IStudentRepository
     {
-        List<Student> GetAll();
+        Task<IList<Student>> GetAll();
+        Task<Student> Get(long id);
+        void Update(Student entity);
+        Task<Student> Add(Student entity);
+        void Delete(Student entity);
+        Task<bool> Any(Expression<Func<Student, bool>> predicate);
     }
+
 }

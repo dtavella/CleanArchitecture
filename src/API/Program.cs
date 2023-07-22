@@ -1,5 +1,8 @@
+using API.ErrorHandlerMiddleware;
 using Core.Repositories;
 using Core.Services.Implementatios;
+using Core.Services.Interfaces;
+using Infrastructure;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,13 +15,16 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddControllers();
 
-builder.Services.AddDbContext<DefaultContext2>(q => q.UseSqlServer(builder.Configuration.GetConnectionString("Default2")));
+builder.Services.AddDbContext<DefaultContext>(q => q.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 
-builder.Services.AddScoped<StudentService>();
-builder.Services.AddScoped<CountryService>();
-builder.Services.AddScoped<StudentServiceAsync>();
+builder.Services.AddScoped<ProcessService>();
+builder.Services.AddScoped<IFileService, FileServiceTest>();
+builder.Services.AddScoped<IStudentService, StudentService>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
+
+app.UseMiddleware<ErrorHandlerMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

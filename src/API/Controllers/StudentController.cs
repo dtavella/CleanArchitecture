@@ -1,5 +1,7 @@
-﻿using Core.Entities;
+﻿using Core.Dtos;
+using Core.Entities;
 using Core.Services.Implementatios;
+using Core.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -8,18 +10,25 @@ namespace API.Controllers
     [ApiController]
     public class StudentController : ControllerBase
     {
-        private readonly StudentService _service;
+        private readonly IStudentService _service;
 
-        public StudentController(StudentService studentService)
+        public StudentController(IStudentService service)
         {
-            _service = studentService;
+            _service = service;
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Add(StudentAddDto dto)
+        {
+            await _service.Add(dto);
+            return Ok();
         }
 
         [HttpGet]
         public ActionResult<List<Student>> GetAll()
         {
-            var student = _service.GetAll();
-            return Ok(student);
+
+            return Ok();
         }
     }
 }
