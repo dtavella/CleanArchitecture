@@ -1,4 +1,5 @@
-﻿using Core.Repositories;
+﻿using Core.Entities;
+using Core.Repositories;
 using Infrastructure.Data;
 using Infrastructure.Repositories;
 
@@ -13,8 +14,6 @@ namespace Infrastructure
             _context = context;
         }
 
-        public IStudentRepository Students => new StudentRepository(_context);
-
         public ICourseRepository Courses => throw new NotImplementedException();
 
         public ICountryRepository Countries => new CountryRepository(_context);
@@ -22,6 +21,11 @@ namespace Infrastructure
         public async Task<int> Commit()
         {
             return await _context.SaveChangesAsync();
+        }
+
+        public IRepository<TE, TI> GetRepository<TE, TI>() where TE : EntityBase<TI>
+        {
+            return new Repository<TE, TI>(_context);
         }
     }
 }

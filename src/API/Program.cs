@@ -1,4 +1,6 @@
 using API.ErrorHandlerMiddleware;
+using AutoMapper;
+using Core.Mapper;
 using Core.Repositories;
 using Core.Services.Implementatios;
 using Core.Services.Interfaces;
@@ -22,7 +24,12 @@ builder.Services.AddScoped<IFileService, FileServiceTest>();
 builder.Services.AddScoped<IStudentService, StudentService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+builder.Services.AddAutoMapper(typeof(MapperProfile));
+
 var app = builder.Build();
+
+var imapper = app.Services.GetRequiredService<IMapper>();
+imapper.ConfigurationProvider.AssertConfigurationIsValid();
 
 app.UseMiddleware<ErrorHandlerMiddleware>();
 

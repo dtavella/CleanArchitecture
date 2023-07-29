@@ -4,12 +4,13 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Data.Configurations
 {
-    public class StudentConfiguration : IEntityTypeConfiguration<Student>
+    public class StudentConfiguration : BaseAuditableEntityConfiguration<Student, long>
     {
-        public void Configure(EntityTypeBuilder<Student> builder)
+        public override void Configure(EntityTypeBuilder<Student> builder)
         {
-            builder.ToTable("Students")
-                   .HasKey(q => q.Id);
+            base.Configure(builder);
+
+            builder.ToTable("Students");
 
             builder.Property(q => q.LastName)
                    .IsRequired()
@@ -17,8 +18,6 @@ namespace Infrastructure.Data.Configurations
 
             builder.Property(q => q.Name).IsRequired().HasMaxLength(128);
             builder.Property(q => q.DocumentNumber).IsRequired().HasMaxLength(24);
-            builder.Property(q => q.CreatedBy).IsRequired().HasMaxLength(128);
-            builder.Property(q => q.CreatedDate).IsRequired();
             builder.Property(q => q.RegistrationDate).IsRequired();
             builder.Property(q => q.BirthDate);
 

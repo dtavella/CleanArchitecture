@@ -8,7 +8,7 @@ namespace Core.Services.Interfaces
         Task<StudentDto> Get(long id);
         Task<IList<StudentDto>> GetAll();
         Task Add(StudentAddDto entity);
-        Task Update(Student entity);
+        Task Update(StudentEditDto dto);
         Task Delete(Student entity);
     }
 }

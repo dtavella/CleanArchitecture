@@ -4,12 +4,13 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Data.Configurations
 {
-    public class CourseConfiguration : IEntityTypeConfiguration<Course>
+    public class CourseConfiguration : BaseAuditableEntityConfiguration<Course, int>
     {
-        public void Configure(EntityTypeBuilder<Course> builder)
+        public override void Configure(EntityTypeBuilder<Course> builder)
         {
-            builder.ToTable("Courses")
-                   .HasKey(q => q.Id);
+            base.Configure(builder);
+
+            builder.ToTable("Courses");
 
             builder.Property(q => q.Code).IsRequired().HasMaxLength(32);
             builder.Property(q => q.Name).IsRequired().HasMaxLength(128);

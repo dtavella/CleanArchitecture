@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API.Processor", "src\API.Pr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "src\Tests\Tests.csproj", "{677D196C-C902-435A-9CF2-C13F14D81E22}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinForm", "src\WinForm\WinForm.csproj", "{6B3D8757-3312-4E13-AB5C-D25845D3EBBA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinForm", "src\WinForm\WinForm.csproj", "{6B3D8757-3312-4E13-AB5C-D25845D3EBBA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC", "src\MVC\MVC.csproj", "{7C1351DA-0754-4CB0-AA7C-C28EDC32D832}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{6B3D8757-3312-4E13-AB5C-D25845D3EBBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B3D8757-3312-4E13-AB5C-D25845D3EBBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B3D8757-3312-4E13-AB5C-D25845D3EBBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C1351DA-0754-4CB0-AA7C-C28EDC32D832}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C1351DA-0754-4CB0-AA7C-C28EDC32D832}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C1351DA-0754-4CB0-AA7C-C28EDC32D832}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C1351DA-0754-4CB0-AA7C-C28EDC32D832}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

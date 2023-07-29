@@ -4,12 +4,13 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Data.Configurations
 {
-    public class ClassTimeConfiguration : IEntityTypeConfiguration<ClassTime>
+    public class ClassTimeConfiguration : BaseAuditableEntityConfiguration<ClassTime, int>
     {
-        public void Configure(EntityTypeBuilder<ClassTime> builder)
+        public override void Configure(EntityTypeBuilder<ClassTime> builder)
         {
-            builder.ToTable("ClassTimes")
-                   .HasKey(x => x.Id);
+            base.Configure(builder);
+
+            builder.ToTable("ClassTimes");
 
             builder.Property(q => q.StartTime).IsRequired();
             builder.Property(q => q.EndTime).IsRequired();

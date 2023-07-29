@@ -1,6 +1,5 @@
 ﻿using Core.Dtos;
 using Core.Entities;
-using Core.Services.Implementatios;
 using Core.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,9 +17,16 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Add(StudentAddDto dto)
+        public async Task<ActionResult> Add([FromBody] StudentAddDto dto)
         {
             await _service.Add(dto);
+            return Ok();
+        }
+
+        [HttpPut]
+        public async Task<ActionResult> Update([FromBody] StudentEditDto dto)
+        {
+            await _service.Update(dto);
             return Ok();
         }
 
