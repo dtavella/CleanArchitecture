@@ -38,6 +38,12 @@ namespace API.ErrorHandlerMiddleware
                 case BusinessNotFoundException:
                     statusCode = HttpStatusCode.NotFound;
                     break;
+                case BusinessUnauthorizedException:
+                    statusCode = HttpStatusCode.Unauthorized;
+                    break;
+                case BusinessForbiddenException:
+                    statusCode = HttpStatusCode.Forbidden;
+                    break;
                 default:
                     statusCode = HttpStatusCode.InternalServerError;
                     break;

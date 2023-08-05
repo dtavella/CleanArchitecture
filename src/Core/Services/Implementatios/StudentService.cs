@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core.ContextProvider;
 using Core.Dtos;
 using Core.Entities;
 using Core.Exceptions;
@@ -11,14 +12,16 @@ namespace Core.Services.Implementatios
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IContextProvider _contextProvider;
 
-        public StudentService(IUnitOfWork unitOfWork, IMapper mapper)
+        public StudentService(IUnitOfWork unitOfWork, IMapper mapper, IContextProvider contextProvider)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _contextProvider = contextProvider;
         }
 
-        public async Task Add(StudentAddDto dto)
+        public async Task<StudentAddDto> Add(StudentAddDto dto)
         {
             if (dto == null) throw new BusinessException("ErrDtoInvalid");
             if(string.IsNullOrWhiteSpace(dto.DocumentNumber)) throw new BusinessException("ErrDocumentNumberIsRequired");
@@ -51,8 +54,10 @@ namespace Core.Services.Implementatios
             //};
 
 
-            await studentRepository.Add(entity);
+            entity = await studentRepository.Add(entity);
             await _unitOfWork.Commit();
+
+            return _mapper.Map<StudentAddDto>(entity);
         }
 
         public Task Delete(Student entity)

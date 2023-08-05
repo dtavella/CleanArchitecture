@@ -1,5 +1,4 @@
-﻿using Core.Entities;
-using Infrastructure.Data.Configurations;
+﻿using Infrastructure.Data.Configurations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -32,6 +31,12 @@ namespace Infrastructure.Data
             modelBuilder.ApplyConfiguration(new CountryConfiguration());
             modelBuilder.ApplyConfiguration(new ClassTimeConfiguration());
 
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new PermissionConfiguration());
+            modelBuilder.ApplyConfiguration(new RoleConfiguration());
+            modelBuilder.ApplyConfiguration(new RolePermissionConfiguration());
+
+            Seeds.SeedData.Seeds(modelBuilder);
         }
 
         //public DbSet<Course> Courses { get; set; }

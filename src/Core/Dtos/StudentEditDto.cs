@@ -9,11 +9,11 @@ namespace Core.Dtos
 
     public abstract class StudentAddEditDto
     {
-        [Required(ErrorMessage = "ErrNameRequired")]
+       // [Required(ErrorMessage = "ErrNameRequired")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "ErrLastNameRequired")]
-        [StringLength(10)]
+       // [Required(ErrorMessage = "ErrLastNameRequired")]
+        //[StringLength(10)]
         public string LastName { get; set; }
         public string DocumentNumber { get; set; }
         public DateTime? BirthDate { get; set; }
